@@ -2,6 +2,10 @@
 
 Este código JavaScript é uma aplicação simples para buscar informações sobre filmes e séries utilizando a API do The Movie Database (TMDb). Ele inclui funcionalidades como a exibição de filmes populares, busca por termos específicos, filtragem por gênero e a capacidade de marcar filmes como favoritos.
 
+## Demo: 
+
+- https://codepen.io/La-s-Lara/pen/VwgqaZE 
+
 ## Instruções de Uso
 
 ### Configuração Inicial:
