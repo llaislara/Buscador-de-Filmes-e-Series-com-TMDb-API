@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flic</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Vina+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+    <header>
+        <h1 class="fliclogo" >  Flic </h1>
+        <div class="col-sm-4" id="menu">
+          <span>Filmes</span>
+          <span>Séries</span>
+          <span>Minha Lista</span>
+        </div>
+        <form id="formSearch">
+          <input type="search" id="search" class="search" placeholder="Search">
+        </form>    
+    </header>
+
+
+
+
+    <div class="row" style="display: flex;">
+      <div class="scroll-arrow l eft" onclick="scrollOptions('left')"><div class="seta">&#9664;</div></div>
+      <div class="filter">
+          <div class="col-sm">
+              <div id="options-menu">
+                  <div class="option" id="popular">Populares</div>
+                  <div class="option" id="recently-added">Adicionados recentemente</div>
+                  <div class="option" id="action">Ação</div>
+                  <div class="option" id="animation">Animação</div>
+                  <div class="option" id="adventure">Aventura</div>
+                  <div class="option" id="comedy">Comédia</div>
+                  <div class="option" id="documentary">Documentário</div>
+                  <div class="option" id="drama">Drama</div>
+                  <div class="option" id="fantasy">Fantasia</div>
+                  <div class="option" id="science-fiction">Ficção científica</div>
+                  <div class="option" id="musical">Musical</div>
+                  <div class="option" id="romance">Romance</div>
+                  <div class="option" id="horror">Terror</div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="scroll-arrow right" onclick="scrollOptions('right')"><div class="seta">&#9654; </div></div>
+  </div>
+  
+  <div class="pageButtons"> 
+    <div class="pageButton" id="afterButton">ANTERIOR</div>
+    <div class="pageButton" id="buttonNumber"></div>
+    <div class="pageButton" id="nextButton">PROXIMO</div>
+  </div>
+
+    <div id="page-menu">   
+    </div>
+  
+    <main id="main"></main>
+    <script src="script.js"></script>
+
+</body>
+</html>
