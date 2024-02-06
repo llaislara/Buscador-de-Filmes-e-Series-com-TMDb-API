@@ -6,7 +6,7 @@ const pageMenu = document.getElementById('pageMenu');
 const optionsMenu = document.getElementById('options-menu');
 
 
-const API_KEY = '8fae6b1c2d91c0403ed3bbdb2030d08d';
+const API_KEY = 'aeaa2a4339ffb122a72ee5bf75938913';
 const API_URL_SEARCH = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=`;
 const API_URL_SEARCH_SERIE = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=`;
 const API_URL_FAVORITES = 'YOUR_FAVORITES_API_ENDPOINT';
@@ -27,20 +27,20 @@ menu.addEventListener('click', (e) => {
   row.style.display = 'flex';
   const menuItem = e.target.innerText.toLowerCase();
   switch (menuItem) {
-    case 'filmes' || '':
+    case 'films' || '':
       currentPageNumberMovies = 1; 
-      currentPage = 'filmes';
+      currentPage = 'films';
       getMovies(API_URL_POPULAR + `&page=${currentPageNumberMovies}`);
       PageNumber();
       break;
-    case 'séries':
+    case 'series':
       currentPageNumberSeries = 1; 
-      currentPage = 'séries';
+      currentPage = 'series';
       getSeries(API_URL_SERIES + `&page=${currentPageNumberSeries}`);
       PageNumber();
       break;
-    case 'minha lista':
-      currentPage = 'minha lista';
+    case 'favorites':
+      currentPage = 'favorites';
       showFavorites(); 
       break;
   }
@@ -55,14 +55,14 @@ let currentPageNumberMovies = 1;
 let currentPageNumberSeries = 1;
 
 afterButton.addEventListener('click', () => {
-  if (currentPage === 'filmes' || currentPage === '') {
+  if (currentPage === 'films' || currentPage === '') {
     if (currentPageNumberMovies <= 1){
       currentPageNumberMovies = 1; 
     } else if (currentPageNumberMovies >= 1){
       currentPageNumberMovies--;
     }
     getMovies(API_URL_POPULAR + `&page=${currentPageNumberMovies}`);
-  } else if (currentPage === 'séries') {
+  } else if (currentPage === 'series') {
     if (currentPageNumberSeries <= 1){
       currentPageNumberSeries = 1; 
     } else if (currentPageNumberSeries >= 1){
@@ -74,14 +74,14 @@ afterButton.addEventListener('click', () => {
 });
   
 nextButton.addEventListener('click', () => {
-  if (currentPage === 'filmes' || currentPage === '') {
+  if (currentPage === 'films' || currentPage === '') {
     if (currentPageNumberMovies >= 100){
       currentPageNumberMovies = 100; 
     } else if (currentPageNumberMovies <= 100){
       currentPageNumberMovies++;
     }
     getMovies(API_URL_POPULAR + `&page=${currentPageNumberMovies}`);
-  } else if (currentPage === 'séries') {
+  } else if (currentPage === 'series') {
     if (currentPageNumberSeries >= 100){
       currentPageNumberSeries = 100; 
     } else if (currentPageNumberSeries <= 100){
@@ -93,11 +93,13 @@ nextButton.addEventListener('click', () => {
 });
 
 function PageNumber() {
-  if (currentPage === '' || currentPage === 'filmes'){
+  currentPageNumberMovies = 1;
+  currentPageNumberSeries = 1; 
+ /* if (currentPage === '' || currentPage === 'films'){
     buttonNumber.textContent = `Página ${currentPageNumberMovies}`;
-  } else if (currentPage === 'séries'){
+  } else if (currentPage === 'series'){
     buttonNumber.textContent = `Página ${currentPageNumberSeries}`;
-  }
+  }*/
 }
 
 async function getMovies(url) {
@@ -115,10 +117,9 @@ async function getSeries(url) {
 /********************************************************
  ****************************FILTROS*********************
  ********************************************************/ 
-
 optionsMenu.addEventListener('click', async (e) => {
   const optionId = e.target.id;
-    if (currentPage === 'filmes' || currentPage === ''){
+    if (currentPage === 'films' || currentPage === ''){
       switch (optionId) {
         case 'recently-added':
           currentPageNumberMovies = 1; 
@@ -226,7 +227,7 @@ optionsMenu.addEventListener('click', async (e) => {
             PageNumber();
             break;
       }
-    } else if (currentPage === 'séries'){
+    } else if (currentPage === 'series'){
         switch (optionId) {
             case 'recently-added':
               currentPageNumberSeries = 1; 
@@ -361,9 +362,9 @@ formSearch.addEventListener('submit', (e) => {
   const searchTerm = search.value.trim();
   if (searchTerm !== '') {
     row.style.display = 'none';
-    if (currentPage === 'filmes') {
+    if (currentPage === 'films') {
       searchMovies(searchTerm);
-    } else if (currentPage === 'séries') {
+    } else if (currentPage === 'series') {
       searchSeries(searchTerm);
     } else {
       searchMovies(searchTerm); // Ajuste conforme necessário
@@ -374,7 +375,7 @@ formSearch.addEventListener('submit', (e) => {
 });
 
 /********************************************************
- ****************************FILMES**********************
+ ****************************films**********************
  ********************************************************/ 
   
 async function getMovies(url) {
@@ -404,7 +405,7 @@ function searchSeries(query) {
 }
   
 /********************************************************
- ****************************SERIES E FILMES ************
+ ****************************SERIES E films ************
  ********************************************************/
   
 
@@ -481,10 +482,10 @@ function searchSeries(query) {
 async function getMovieDetails(movieID) {
   let detailsURL, creditsURL;
 
-  if (currentPage === 'séries') {
+  if (currentPage === 'series') {
     detailsURL = `https://api.themoviedb.org/3/tv/${movieID}?api_key=${API_KEY}&page=${currentPageNumberMovies}`;
     creditsURL = `https://api.themoviedb.org/3/tv/${movieID}/credits?api_key=${API_KEY}&page=${currentPageNumberMovies}`;
-  } else if (currentPage === 'filmes' || currentPage === '') {
+  } else if (currentPage === 'films' || currentPage === '') {
     detailsURL = `https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&page=${currentPageNumberSeries}`;
     creditsURL = `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${API_KEY}&page=${currentPageNumberSeries}`;
   } else{
@@ -601,7 +602,7 @@ function showFavorites() {
   main.innerHTML = '';
   if (favorites.length === 0) {
     const noFavoritesMessage = document.createElement('p');
-    noFavoritesMessage.textContent = "Você ainda não possui nenhum filme favorito.";
+    noFavoritesMessage.textContent = "No media added";
     main.appendChild(noFavoritesMessage);
   } else {
     favorites.forEach((movie) => {
@@ -623,11 +624,11 @@ function showFavorites() {
 
 function getClassByRate(vote) {
   if (vote >= 8) {
-    return 'green';
+    return 'white';
   } else if (vote >= 5) {
-    return 'orange';
+    return 'white';
   } else {
-    return 'red';
+    return 'white';
   }
 }
 
@@ -656,3 +657,4 @@ function scrollOptions(direction) {
   newPosition = -currentIndex * optionWidth;
   optionsmenu.style.transform = 'translateX(' + newPosition + 'px)';
 } 
+
